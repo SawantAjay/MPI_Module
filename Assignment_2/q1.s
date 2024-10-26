@@ -1,0 +1,28 @@
+		AREA mycode,CODE,READONLY
+		ENTRY
+		EXPORT start
+	
+start   
+		LDR R0,= 0X20005000
+		MOV SP,R0
+		LDR R1,= 0X20006000
+		MSR PSP,R1
+			
+		MOV R0, #0X01			
+		MOV R1, #0X02	
+		MOV R2, #0X03		
+		MOV R3, #0X04		
+		MOV R4, #0X05		
+		MOV R5, #0X06
+		
+		PUSH {R0-R5,LR}
+		MSR PSR, R6
+		PUSH{R6}
+		
+		POP{R7-R12}
+		POP{R14}
+		POP{R6}
+		MSR PSR, R6
+		
+		B .
+		END

@@ -1,0 +1,20 @@
+		AREA mycode,CODE,READONLY
+		ENTRY
+		EXPORT start
+			
+start   PROC
+		
+		MOV R0, #0X20002000
+		MSR PSP,R0
+		ORR R0,R0,#1
+		MRS R0, CONTROL
+		ORR R0,R0,#2
+		ORR R0,R0,#1
+		MSR CONTROL,R0
+		
+		ISB
+		BX LR
+		ENDP 
+		END	
+		
+		
